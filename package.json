@@ -7,5 +7,23 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mitsui",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "coffee-script": "^1.8.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-csscomb": "^3.0.3",
+    "gulp-ruby-sass": "^0.7.1",
+    "gulp-coffee": "^2.2.0",
+    "gulp-pleeease": "^1.0.4",
+    "gulp-util": "^3.0.1",
+    "gulp-notify": "^2.0.1",
+    "gulp-imagemin": "^1.2.1",
+    "gulp-csslint": "^0.1.5",
+    "gulp-coffeelint": "^0.4.0",
+    "gulp-prettify": "^0.3.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-htmlhint": "0.0.9",
+    "gulp-webshot": "0.0.2"
+  }
 }
