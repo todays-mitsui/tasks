@@ -24,6 +24,7 @@
     "gulp-prettify": "^0.3.0",
     "gulp-jshint": "^1.9.0",
     "gulp-htmlhint": "0.0.9",
-    "gulp-webshot": "0.0.2"
+    "gulp-webshot": "0.0.2",
+    "imagemin-pngcrush": "^4.0.0"
   }
 }
