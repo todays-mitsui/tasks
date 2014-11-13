@@ -31,10 +31,10 @@ gulp.task 'sass', ->
           'iOS >= 6'
         ]
       minifier: false
-    .pipe gulp.dest 'css/'
+    .pipe gulp.dest './css/'
 
 gulp.task 'sass-watch', ->
-  gulp.watch 'sass/**/*.sass', ['sass']
+  gulp.watch ['sass/**/*.sass', 'sass/**/*.scss', 'scss/**/*.sass', 'scss/**/*.sass'], ['sass']
 
 
 gulp.task 'coffee', ->
@@ -42,7 +42,7 @@ gulp.task 'coffee', ->
     .pipe plumber
       errorHandler: notify.onError '<%= error.message %>'
     .pipe coffee()
-    .pipe gulp.dest 'js/'
+    .pipe gulp.dest './js/'
 
 gulp.task 'coffee-watch', ->
   gulp.watch 'coffee/**/*.coffee', ['coffee']
@@ -54,4 +54,4 @@ gulp.task 'imagemin', ->
       progressive: true
       svgoPlugins: [removeViewBox: false]
       use: [pngcrush()]
-    .pipe gulp.dest 'img/'
+    .pipe gulp.dest './img/'
