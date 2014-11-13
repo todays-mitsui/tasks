@@ -14,7 +14,7 @@ pngcrush = require 'imagemin-pngcrush'
 
 
 gulp.task 'sass', ->
-  gulp.src 'sass/**/*.sass'
+  gulp.src ['sass/**/*.sass', 'sass/**/*.scss', 'scss/**/*.sass', 'scss/**/*.sass']
     .pipe plumber
       errorHandler: notify.onError '<%= error.message %>'
     .pipe sass
@@ -23,7 +23,9 @@ gulp.task 'sass', ->
     .pipe pleeease
       fallbacks:
         autoprefixer: [
-          'last 4 versions',
+          'last 5 IE versions',
+          'last 2 Chrome versions',
+          'last 2 Firefox versions',
           'Android 2.3',
           'Android >= 4',
           'iOS >= 6'
