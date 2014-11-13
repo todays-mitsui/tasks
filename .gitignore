@@ -1,3 +1,13 @@
+### gulp ###
+
+/assets/
+/sass/
+/css/
+/coffee/
+/js/
+/img/
+
+
 ### Sass ###
 
 .sass-cache
