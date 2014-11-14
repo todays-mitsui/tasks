@@ -49,9 +49,9 @@ gulp.task 'coffee-watch', ->
 
 
 gulp.task 'imagemin', ->
-  gulp.src '**/img/*'
+  gulp.src ['!node_modules/**/*', '**/img/**/*.{png,jpg,jpeg,gif}']
     .pipe imagemin
       progressive: true
       svgoPlugins: [removeViewBox: false]
       use: [pngcrush()]
-    .pipe gulp.dest './img/'
+    .pipe gulp.dest './'
