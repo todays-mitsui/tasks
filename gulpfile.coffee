@@ -8,6 +8,7 @@ csscomb  = require 'gulp-csscomb'
 pleeease = require 'gulp-pleeease'
 
 coffee   = require 'gulp-coffee'
+jshint   = require 'gulp-jshint'
 
 imagemin = require 'gulp-imagemin'
 pngcrush = require 'imagemin-pngcrush'
@@ -53,3 +54,8 @@ gulp.task 'imagemin', ->
       svgoPlugins: [removeViewBox: false]
       use: [pngcrush()]
     .pipe gulp.dest 'img/'
+
+gulp.task 'hint', ->
+  gulp.src ['**/*.js', '!node_modules/**/*.js']
+    .pipe jshint()
+    .pipe jshint.reporter 'default'
