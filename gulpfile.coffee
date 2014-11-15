@@ -11,7 +11,10 @@ coffee   = require 'gulp-coffee'
 jshint   = require 'gulp-jshint'
 
 imagemin = require 'gulp-imagemin'
-pngcrush = require 'imagemin-pngcrush'
+#pngcrush = require 'imagemin-pngcrush'
+optipng  = require 'imagemin-optipng'
+jpegtran = require 'imagemin-jpegtran'
+gifsicle = require 'imagemin-gifsicle'
 
 
 gulp.task 'sass', ->
@@ -52,8 +55,8 @@ gulp.task 'imagemin', ->
     .pipe imagemin
       progressive: true
       svgoPlugins: [removeViewBox: false]
-      use: [pngcrush()]
-    .pipe gulp.dest 'img/'
+      use: [optipng(), jpegtran(), gifsicle()]
+    .pipe gulp.dest __dirname
 
 gulp.task 'hint', ->
   gulp.src ['**/*.js', '!node_modules/**/*.js']
