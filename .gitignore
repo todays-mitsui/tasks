@@ -1,16 +1,10 @@
-### gulp-test ###
-
-/test/
-
 
 ### Sass ###
-
 .sass-cache
 *.css.map
 
 
 ### OSX ###
-
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -21,9 +15,11 @@ Icon
 # Thumbnails
 ._*
 
+
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -31,6 +27,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
 
 ### Windows ###
 
@@ -50,13 +47,11 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-
 # Windows shortcuts
 *.lnk
 
 
 ### Linux ###
-
 *~
 
 # KDE directory preferences
