@@ -1,4 +1,5 @@
 gulp     = require 'gulp'
+watch    = require 'gulp-watch'
 
 plumber  = require 'gulp-plumber'
 notify   = require 'gulp-notify'
@@ -16,9 +17,15 @@ optipng  = require 'imagemin-optipng'
 jpegtran = require 'imagemin-jpegtran'
 gifsicle = require 'imagemin-gifsicle'
 
+browserSync = require 'browser-sync'
+
+gulp.task 'test', ->
+  console.log __dirname
+
+### Sass ###
 
 gulp.task 'sass', ->
-  gulp.src ['sass/**/*.sass', 'sass/**/*.scss', 'scss/**/*.sass', 'scss/**/*.sass']
+  gulp.src ['./{sass,scss}/**/*.{sass,scss}']
     .pipe plumber
       errorHandler: notify.onError '<%= error.message %>'
     .pipe sass
@@ -41,6 +48,8 @@ gulp.task 'sass-watch', ->
   gulp.watch ['sass/**/*.sass', 'sass/**/*.scss', 'scss/**/*.sass', 'scss/**/*.sass'], ['sass']
 
 
+### Coffee Script ###
+
 gulp.task 'coffee', ->
   gulp.src 'coffee/**/*.coffee'
     .pipe plumber
@@ -52,6 +61,8 @@ gulp.task 'coffee-watch', ->
   gulp.watch 'coffee/**/*.coffee', ['coffee']
 
 
+### Image Min ###
+
 gulp.task 'imagemin', ->
   gulp.src ['!node_modules/**/*', '**/img/**/*.{png,jpg,jpeg,gif}']
     .pipe imagemin
@@ -60,9 +71,26 @@ gulp.task 'imagemin', ->
       use: [optipng(), jpegtran(), gifsicle()]
     .pipe gulp.dest __dirname
 
+
+### JS Hint ###
+
 gulp.task 'hint', ->
   gulp.src ['**/*.js', '!node_modules/**/*.js']
     .pipe jshint()
     .pipe jshint.reporter 'default'
       use: [pngcrush()]
     .pipe gulp.dest './'
+
+
+### Browser Sync ###
+
+gulp.task 'browser-sync', ->
+  browserSync
+    server
+      baseDir: './'
+
+gulp.task 'browser-sync-reload', ['sass'], ->
+	browserSync.reload()
+
+gulp.task 'preview', ['browser-sync'] ->
+  gulp.watch ['./{sass,scss}/**/*.{sass,scss}', './**/*.{html,php}'], ['browser-sync-reload']

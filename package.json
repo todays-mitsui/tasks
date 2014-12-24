@@ -25,11 +25,13 @@
     "gulp-jshint": "^1.9.0",
     "gulp-htmlhint": "0.0.9",
     "gulp-webshot": "0.0.2",
-    "imagemin-pngcrush": "^4.0.0"
+    "imagemin-pngcrush": "^4.0.0",
+    "browser-sync": "~1.8.2"
   },
   "dependencies": {
     "imagemin-optipng": "^4.0.0",
     "imagemin-jpegtran": "^4.0.0",
-    "imagemin-gifsicle": "^4.0.0"
+    "imagemin-gifsicle": "^4.0.0",
+    "gulp-watch": "~3.0.0"
   }
 }
