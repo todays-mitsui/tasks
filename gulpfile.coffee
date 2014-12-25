@@ -1,5 +1,6 @@
 gulp     = require 'gulp'
 watch    = require 'gulp-watch'
+flatten  = require 'gulp-flatten'
 
 plumber  = require 'gulp-plumber'
 notify   = require 'gulp-notify'
@@ -19,13 +20,14 @@ gifsicle = require 'imagemin-gifsicle'
 
 browserSync = require 'browser-sync'
 
+
 gulp.task 'test', ->
-  console.log __dirname
+  console.log process.env.INIT_CWD
 
 ### Sass ###
 
 gulp.task 'sass', ->
-  gulp.src ['./{sass,scss}/**/*.{sass,scss}']
+  gulp.src "#{process.env.INIT_CWD}/{sass,scss}/**/*.{sass,scss}"
     .pipe plumber
       errorHandler: notify.onError '<%= error.message %>'
     .pipe sass
@@ -42,7 +44,10 @@ gulp.task 'sass', ->
           'iOS >= 6'
         ]
       minifier: false
-    .pipe gulp.dest './css/'
+    .pipe flatten()
+    .pipe gulp.dest "#{process.env.INIT_CWD}/css/"
+    .pipe browserSync.reload
+      stream: true
 
 gulp.task 'sass-watch', ->
   gulp.watch ['sass/**/*.sass', 'sass/**/*.scss', 'scss/**/*.sass', 'scss/**/*.sass'], ['sass']
@@ -78,7 +83,6 @@ gulp.task 'hint', ->
   gulp.src ['**/*.js', '!node_modules/**/*.js']
     .pipe jshint()
     .pipe jshint.reporter 'default'
-      use: [pngcrush()]
     .pipe gulp.dest './'
 
 
@@ -86,11 +90,12 @@ gulp.task 'hint', ->
 
 gulp.task 'browser-sync', ->
   browserSync
-    server
-      baseDir: './'
+    server:
+      baseDir: "#{process.env.INIT_CWD}/"
 
-gulp.task 'browser-sync-reload', ['sass'], ->
-	browserSync.reload()
+gulp.task 'browser-sync-reload', ->
+  browserSync.reload()
 
-gulp.task 'preview', ['browser-sync'] ->
-  gulp.watch ['./{sass,scss}/**/*.{sass,scss}', './**/*.{html,php}'], ['browser-sync-reload']
+gulp.task 'preview', ['browser-sync'], ->
+  gulp.watch "#{process.env.INIT_CWD}/{sass,scss}/**/*.{sass,scss}", ['sass']
+  gulp.watch "#{process.env.INIT_CWD}/**/*.{html,php}", ['browser-sync-reload']
