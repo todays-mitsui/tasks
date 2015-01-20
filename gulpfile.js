@@ -1,2 +1,3 @@
+var gulp = require('gulp');
 require('coffee-script/register');
-require('./tasks/gulpfile.coffee');
+require('./tasks/gulpfile.coffee')(gulp);
