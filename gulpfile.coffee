@@ -38,6 +38,9 @@ module.exports = (gulp) ->
         fallbacks:
           autoprefixer: [
             'last 4 versions',
+            'last 5 IE versions',
+            'last 2 Chrome versions',
+            'last 2 Firefox versions',
             'Android >= 4',
             'Android 2.3',
             'iOS >= 6',
