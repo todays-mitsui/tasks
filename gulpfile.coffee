@@ -116,6 +116,7 @@ module.exports = (gulp) ->
   gulp.task 'preview', ['browser-sync'], ->
     gulp.watch "#{process.env.INIT_CWD}/{sass,scss}/**/*.{sass,scss}", ['sass-changed']
     gulp.watch "#{process.env.INIT_CWD}/coffee/**/*.coffee", ['coffee']
+    gulp.watch "#{process.env.INIT_CWD}/css/**/*.css", ['browser-sync-reload']
     gulp.watch "#{process.env.INIT_CWD}/**/*.{html,php}", ['browser-sync-reload']
 
 
