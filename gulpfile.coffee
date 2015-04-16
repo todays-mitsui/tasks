@@ -46,6 +46,7 @@ module.exports = (gulp) ->
             'iOS >= 6',
           ]
         minifier: false
+        rem: ['10px']
       .pipe csscomb()
       .pipe flatten()
       .pipe gulp.dest "#{process.env.INIT_CWD}/css/"
@@ -71,6 +72,7 @@ module.exports = (gulp) ->
             'iOS >= 6',
           ]
         minifier: false
+        rem: ['10px']
       .pipe csscomb()
       .pipe flatten()
       .pipe gulp.dest "#{process.env.INIT_CWD}/css/"
@@ -112,6 +114,8 @@ module.exports = (gulp) ->
   gulp.task 'browser-sync-reload', ->
     browserSync.reload()
 
+  gulp.task 'sass-watch', ['browser-sync'], ->
+    gulp.watch "#{process.env.INIT_CWD}/{sass,scss}/**/*.{sass,scss}", ['sass-changed']
 
   gulp.task 'preview', ['browser-sync'], ->
     gulp.watch "#{process.env.INIT_CWD}/{sass,scss}/**/*.{sass,scss}", ['sass-changed']
