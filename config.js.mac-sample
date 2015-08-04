@@ -1,0 +1,5 @@
+module.exports = {
+  port:    80,
+  php_bin: '/Applications/MAMP/bin/php/php5.6.2/bin/php',
+  php_ini: '/Applications/MAMP/bin/php/php5.6.2/conf/php.ini',
+}
