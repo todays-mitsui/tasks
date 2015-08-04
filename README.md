@@ -113,4 +113,96 @@ gulp develop
 
 ## タスク実行までのセットアップ
 
-*To Be Continued...*
+※*タスクの実行にはRuby, Sass, NodeJSがインストールされている必要があります。  
+　セットアップ前にインストールを済ませておいてください。*
+
+このgulpタスクは複数のプロジェクトで共通に使うことを想定しています。
+
+例として、以下のようにプロジェクトA, プロジェクトB, プロジェクトCのファイルを格納したディレクトリがあるとき、
+`tasks`ディレクトリはすべてのプロジェクトディレクトリを格納するディレクトリ(下記の例では`projects`ディレクトリ)
+の下に配置してください。
+
+```
+projects
+ ├─ project_A
+ │　  ├─ sass
+ │　  ├─ css
+ │　  └─ index.html
+ │
+ ├─ project_B
+ │　  ├─ sass
+ │　  ├─ css
+ │　  └─ index.html
+ │
+ ├─ test
+ │　  └─ project_C
+ │　　　　  ├─ css
+ │　　　　  ├─ sass
+ │　　　　  └─ index.html
+ │
+ └─ tasks  <- cloneしたtasksディレクトリをこの位置に配置
+ 　　  ├─ .csscomb.json
+ 　　  ├─ config.js
+ 　　  ├─ gulpfile-coffee.js
+ 　　  ├─ gulpfile-default.js
+ 　　  ├─ gulpfile-develop.js
+ 　　  ├─ gulpfile-preview.js
+ 　　  ├─ gulpfile-sass.js
+ 　　  ├─ gulpfile.js
+ 　　  └─ package.json
+```
+
+次にtasksディレクトリのうち、`gulpfile.js`と`package,json`を一つ上のディレクトリに移動します。
+
+```
+projects
+ ├─ project_A
+ │　  ├─ sass
+ │　  ├─ css
+ │　  └─ index.html
+ │
+ ├─ project_B
+ │　  ├─ sass
+ │　  ├─ css
+ │　  └─ index.html
+ │
+ ├─ test
+ │　  └─ project_C
+ │　　　　  ├─ css
+ │　　　　  ├─ sass
+ │　　　　  └─ index.html
+ │
+ ├─ tasks
+ │　  ├─ .csscomb.json
+ │　  ├─ config.js
+ │　  ├─ gulpfile-coffee.js
+ │　  ├─ gulpfile-default.js
+ │　  ├─ gulpfile-develop.js
+ │　  ├─ gulpfile-preview.js
+ │　  └─ gulpfile-sass.js
+ │
+ ├─ gulpfile.js   <- この2つのファイルをtasksディレクトリから出して
+ └─ package.json  <- この位置に配置する
+```
+
+コマンドプロンプトまたはターミナルを開いて`projects`ディレクトリに移動し、以下のコマンドを実行してセットアップします。
+
+```bash
+npm install -g gulp
+npm install
+```
+
+必要なモジュールのインストールが完了すればセットアップ完了です。
+
+テストとして`project_A`ディレクトリに移動してSassのコンパイルを実行してみます。
+
+```bash
+~/projects$ cd project_A
+~/projects/project_A$ gulp sass-compile
+[12:11:56] Working directory changed to ~/projects
+[12:12:11] Using gulpfile ~/projects/gulpfile.js
+[12:12:11] Starting 'sass-compile'...
+$
+```
+
+という感じで、tasksで定義されているgulpタスクはprojectsフォルダ内であればどこでも使用できます。
