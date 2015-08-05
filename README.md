@@ -90,7 +90,7 @@ Document Root内のHTML, PHP, CSS, JSを`watch`して、変更があった場合
 **注意**  
 環境に応じてPHPの実行ファイルと`php.ini`の場所を指定する必要があります。  
 `tasks/config.js`にオブジェクト形式で絶対パスを記述します。  
-Windows用,Mac用それぞれのサンプルとして`config.js.win-example`と`config.js.mac-example`を用意しているので適宜 拡張子を変更して使用してください。
+Windows用,Mac用それぞれのサンプルとして`config.js.win-sample`と`config.js.mac-sample`を用意しているので適宜 拡張子を変更して使用してください。
 
 Apacheが立ち上がっている訳ではないので、`mod_rewrite`等Apache固有の機能は利用できません。  
 また、`.htaccess`でPHPの設定を変更しているものについても反映されません。PHPの設定はphp.iniにあらかじめ記述しておく必要があります。
@@ -152,6 +152,8 @@ projects
  　　  └─ package.json
 ```
 
+<br>
+
 次にtasksディレクトリのうち、`gulpfile.js`と`package,json`を一つ上のディレクトリに移動します。
 
 ```
@@ -185,6 +187,8 @@ projects
  └─ package.json  <- この位置に配置する
 ```
 
+<br>
+
 コマンドプロンプトまたはターミナルを開いて`projects`ディレクトリに移動し、以下のコマンドを実行してセットアップします。
 
 ```bash
@@ -202,7 +206,11 @@ npm install
 [12:11:56] Working directory changed to ~/projects
 [12:12:11] Using gulpfile ~/projects/gulpfile.js
 [12:12:11] Starting 'sass-compile'...
-$
 ```
 
 という感じで、tasksで定義されているgulpタスクはprojectsフォルダ内であればどこでも使用できます。
+
+## TODO
+
+- HTML等のバリデーションタスク追加
+- 画像の圧縮・最適化タスク追加
