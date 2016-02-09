@@ -1,13 +1,15 @@
-var cache    = require('gulp-cached');    // タスク高速化のためにキャッシュ使用
-var flatten  = require('gulp-flatten');   // ネストしたディレクトリ構造をフラットにする
-var filter   = require('gulp-filter');    // 特定の拡張子以外のファイルをフィルターする
+'use strict';
 
-var plumber  = require('gulp-plumber');   // エラー処理用
-var notify   = require('gulp-notify');    // エラー時の通知用
+var cache    = require('gulp-cached');   // タスク高速化のためにキャッシュ使用
+var flatten  = require('gulp-flatten');  // ネストしたディレクトリ構造をフラットにする
+var filter   = require('gulp-filter');   // 特定の拡張子以外のファイルをフィルターする
 
-var sass     = require('gulp-ruby-sass'); // Sassを呼び出す
-var csscomb  = require('gulp-csscomb');   // CSSプロパティをルール通りに並び替え
-var pleeease = require('gulp-pleeease');  // ベンダープレフィックスの付け外し、remのfallbackなど
+var plumber  = require('gulp-plumber');  // エラー処理用
+var notify   = require('gulp-notify');   // エラー時の通知用
+
+var sass     = require('gulp-sass');     // SASS,SCSS を CSS に変換
+var cssnext  = require('gulp-cssnext');  // 先行実装の CSS の記法をフォールバック
+var csscomb  = require('gulp-csscomb');  // CSSプロパティをルール通りに並び替え
 
 
 module.exports = function(gulp) {
@@ -27,7 +29,7 @@ module.exports = function(gulp) {
   // SourceMap無し
   // CSScombを通った後で"--style expanded"っぽくなる
   gulp.task('sass-compile', function() {
-    return sass(srcd, {sourcemap: false})
+    return gulp.src(srcd + '**/*.{sass,scss}')
       .on('error', function (err) {
         console.log(err.plugin, err.message);
       })
@@ -35,20 +37,16 @@ module.exports = function(gulp) {
         errorHandler: notify.onError('<%= error.message %>')
       }))
       .pipe(cache('sass'))
-      .pipe(filter('**/*.css'))
-      .pipe(pleeease({
-        fallbacks: {
-          autoprefixer: [
-            'last 4 versions',
-            'last 5 IE versions',
-            'last 2 Chrome versions',
-            'last 2 Firefox versions',
-            'Android >= 4',
-            'Android 2.3',
-            'iOS >= 6',
-          ]},
-        minifier: false,
-        rem: ['10px']
+      .pipe(sass())
+      .pipe(cssnext({
+        browsers: [
+          'last 4 versions',
+          'last 4 IE versions',
+          'last 2 Chrome versions',
+          'last 2 Firefox versions',
+          'Android >= 4',
+          'iOS >= 7',
+        ],
       }))
       .pipe(csscomb({configPath: './tasks/.csscomb.json'}))
       .pipe(flatten())
